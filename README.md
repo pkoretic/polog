@@ -1,8 +1,8 @@
-## Polog
+<div align="center"><img src="misc/polog.png"/></div>
 
-Polog is a fast and simple Node.js logging library that behaves as the standard `console` command,
-       except it is faster and adds some little sugar as timestamp and log levels. This library uses
-       as little processing power as possible to avoid affecting Node.js event loop.
+`polog` is one of the fastest and simplest Node.js logging library that behaves as the standard
+`console` command. It adds some sugar as timestamp and log levels. This library uses as
+little processing power as possible to avoid affecting Node.js event loop.
 
 Logging (in Node.js) should always use stdout/stderr and leave advanced logging manipulation to the
 rest of the stack. For best performance and asynchronous operation you should use pipes on Linux as

@@ -35,13 +35,13 @@ log.debug("will be shown")
 
 ```
 const log = require('polog')({ format: true })
-polog.log("test: %d", Math.random())
+log.info("test: %d", Math.random())
 ```
 
 if disabled (default), which is faster, use ES6 template strings
 
 ```
-polog.log("test: ${Math.random()}")
+log.info("test: ${Math.random()}")
 ```
 
 **prefix** - prefix messages with custom output, default is `Date.now`

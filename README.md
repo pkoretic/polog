@@ -20,11 +20,57 @@ This also enables you to do file logging as efficiently as possible.
 npm install polog
 ```
 
+### Options
+
+Options can be passed as object before creation.
+
+**debug** - enable output of `.debug` function, if set to `false` (default) it won't print anything
+
+```
+const log = require('polog')({ debug: true })
+log.debug("will be shown")
+```
+
+**format** - enable usage of util.format, ie:
+
+```
+const log = require('polog')({ format: true })
+polog.log("test: %d", Math.random())
+```
+
+if disabled (default), which is faster, use ES6 template strings
+
+```
+polog.log("test: ${Math.random()}")
+```
+
+**prefix** - prefix messages with custom output, default is `Date.now`
+```
+const log = require("../index.js")({ prefix: () => { return (new Date).toISOString() }})
+```
+
+Keep in mind that this is also called on every message output, so you want to keep it as simple as
+possible.
+
+### Levels
+
+There are four standard levels:
+
+**info** `I` - standard `stdout` output
+
+**debug** `D` - debug `stdout` output, depens on `debug` options, useful for (NON)PRODUCTION
+environment switching
+
+**warn** `W` - `stderr` warnings output
+
+**error** `E` - `stderr` error output
+
+Currently there is no way to add new levels, if that is wanted, please open an issue.
+
 ### Standard logging
 
 ```
-const enable_debug = true
-const log = require('polog')(enable_debug)
+const log = require('polog')({ debug: true })
 
 log.debug("debug mode") // shown only when debug is set to true above
 log.info("hello there!")
@@ -32,14 +78,52 @@ log.warn("be careful")
 log.error("not good")
 ```
 
-this results in
+This will output:
 
 ```
-2017-05-03T20:28:05.089Z D debug mode
-2017-05-03T20:28:05.090Z I hello there!
-2017-05-03T20:28:05.090Z W be careful
-2017-05-03T20:28:05.090Z E not good
+1494005876469 D debug mode
+1494005876469 I hello there!
+1494005876470 W be careful
+1494005876470 E not good
 ```
+
+Using `format` option:
+
+```
+const log = require('polog')({ format: true })
+
+log.info("test message: %d", Math.random())
+```
+outputs:
+
+```
+// # 1494006079148 I test message: 0.17100814691155053
+```
+This calls [util.format](https://nodejs.org/api/util.html#util_util_format_format_args) that is also
+used by `console.*` functions. It is slower since every message has to be processed first. It is
+recommended to use ES6 template string instead:
+
+```
+const log = require('polog')()
+
+log.info(`test message: ${Math.random()}`)
+````
+
+Changing prefix:
+
+```
+const log = require("../index.js")({ prefix: () => { return (new Date).toISOString()}})
+
+log.info("test message")
+```
+
+outputs:
+```
+2017-05-05T17:53:05.702Z I test message
+```
+
+This is probably more user friendly, altough default `Date.now` is faster since Date object doesn't
+have to be created for every function call.
 
 ### Fast file logging on Linux
 
@@ -53,21 +137,4 @@ Split standard and error logs
 
 ```
 node app.js > access.log 2>error.log
-```
-
-### Formatting
-
-Formatting options are the same as for the `console` functions, processed by
-[util.format](https://nodejs.org/api/util.html#util_util_format_format_args).
-
-```
-const x = Math.random()
-log.info("hello %d", x)
-```
-
-Keep in mind that, in certain cases, it is faster to use ES6 template strings if possible, ie:
-
-```
-const x = Math.random()
-log.info("hello ${x}")
 ```

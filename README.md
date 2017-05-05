@@ -29,7 +29,7 @@ const log = require('polog')(enable_debug)
 log.debug("debug mode") // shown only when debug is set to true above
 log.info("hello there!")
 log.warn("be careful")
-log.error("not god")
+log.error("not good")
 ```
 
 this results in
@@ -38,7 +38,7 @@ this results in
 2017-05-03T20:28:05.089Z D debug mode
 2017-05-03T20:28:05.090Z I hello there!
 2017-05-03T20:28:05.090Z W be careful
-2017-05-03T20:28:05.090Z E not god
+2017-05-03T20:28:05.090Z E not good
 ```
 
 ### Fast file logging on Linux

@@ -27,14 +27,14 @@ Options can be passed as object before creation.
 **debug** - enable output of `.debug` function, if set to `false` (default) it won't print anything
 
 ```
-const log = require('polog')({ debug: true })
+const log = require("polog")({ debug: true })
 log.debug("will be shown")
 ```
 
 **format** - enable usage of util.format, ie:
 
 ```
-const log = require('polog')({ format: true })
+const log = require("polog")({ format: true })
 log.info("test: %d", Math.random())
 ```
 
@@ -70,7 +70,7 @@ Currently there is no way to add new levels, if that is wanted, please open an i
 ### Standard logging
 
 ```
-const log = require('polog')({ debug: true })
+const log = require("polog")({ debug: true })
 
 log.debug("debug mode") // shown only when debug is set to true above
 log.info("hello there!")
@@ -90,7 +90,7 @@ This will output:
 Using `format` option:
 
 ```
-const log = require('polog')({ format: true })
+const log = require("polog")({ format: true })
 
 log.info("test message: %d", Math.random())
 ```
@@ -104,7 +104,7 @@ used by `console.*` functions. It is slower since every message has to be proces
 recommended to use ES6 template string instead:
 
 ```
-const log = require('polog')()
+const log = require("polog")()
 
 log.info(`test message: ${Math.random()}`)
 ````
@@ -112,7 +112,7 @@ log.info(`test message: ${Math.random()}`)
 Changing prefix:
 
 ```
-const log = require("../index.js")({ prefix: () => { return (new Date).toISOString()}})
+const log = require("../index.js")({ prefix: () => { return (new Date).toISOString() }})
 
 log.info("test message")
 ```

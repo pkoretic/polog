@@ -1,4 +1,4 @@
-module.exports = function(options)
+module.exports = function(options = {})
 {
     const debugMode = options.debug || false
     const format = options.format ? require("util").format : false

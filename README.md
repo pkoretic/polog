@@ -4,8 +4,9 @@
 [![NPM](https://nodei.co/npm/polog.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/polog)
 
 `polog` is one of the [fastest](benchmarks) and simplest Node.js logging library that behaves as the
-standard `console` command. It adds minor features as timestamp, log levels and json as opt-in. This
-library uses as little processing power as possible to avoid affecting Node.js event loop.
+standard `console` command. It has no dependencies and adds minor features as timestamp, log levels
+and json as opt-in. This library uses as little processing power as possible to avoid affecting
+Node.js event loop.
 
 Logging (in Node.js) should always use stdout/stderr and leave advanced logging manipulation to the
 rest of the stack. For best performance and asynchronous operation you should use pipes on Linux as

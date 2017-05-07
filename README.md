@@ -3,7 +3,7 @@
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/pkoretic/polog/blob/master/LICENSE)<br/>
 [![NPM](https://nodei.co/npm/polog.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/polog)
 
-`ppolog.pngolog` is one of the [fastest](benchmarks) and simplest Node.js logging library that behaves as the
+`polog` is one of the [fastest](benchmarks) and simplest Node.js logging library that behaves as the
 standard `console` command. It has no dependencies and adds minor features as timestamp, log levels
 and json as opt-in. This library uses as little processing power as possible to avoid affecting
 Node.js event loop.

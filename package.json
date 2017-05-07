@@ -4,8 +4,12 @@
   "description": "very fast and simple console logging library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/**.spec.js"
   },
   "author": "Petar Koretic",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0"
+  }
 }

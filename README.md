@@ -15,13 +15,13 @@ This also enables you to do file logging as efficiently as possible.
 
 `console` uses process.stdout.write which has the same behaviour as this library.
 
-### Installation
+## Installation
 
 ```
 npm install polog
 ```
 
-### Options
+## Options
 
 Options can be passed as object before creation.
 
@@ -59,7 +59,7 @@ const log = require("polog")({ json: true })
 log.info("json")
 ```
 
-### Levels
+## Levels
 
 There are four standard levels:
 
@@ -74,7 +74,7 @@ environment switching
 
 Currently there is no way to add new levels, if that is wanted, please open an issue.
 
-### Standard logging
+## Standard logging
 
 ```
 const log = require("polog")({ debug: true })
@@ -145,7 +145,7 @@ outputs:
 [1494153657008,"I","json!"]
 ```
 
-### Fast file logging on Linux
+## Fast file logging on Linux
 
 Redirect (pipe) all logs to a file [asynchronously](https://nodejs.org/api/process.html#process_a_note_on_process_i_o)
 
@@ -159,12 +159,12 @@ Split standard and error logs
 node app.js > access.log 2>error.log
 ```
 
-### [Benchmarks](benchmarks)
+## [Benchmarks](benchmarks)
 
 This should be the fastest logging library for Node.js as far as we know. [Test](benchmarks) it
 yourself and provide feedback.
 
-### Changelog
+## Changelog
 
 **1.1.0** Adds `json` support.
 

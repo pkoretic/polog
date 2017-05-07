@@ -1,4 +1,5 @@
 const polog = require('../')({})
+const jpolog = require('../')({ json: true })
 const pino = require('pino')()
 const winston = require('winston')
 const log4js = require('log4js').getLogger()
@@ -25,7 +26,7 @@ console.info(`${_tag} << writing ${size} lines >>`)
 
 console.time(_tag + "console")
 for(let i=0; i<size; i++)
-    console.log(Date.now() + message)
+    console.log(Date.now() + " " + message)
 console.timeEnd(_tag + "console")
 
 console.time(_tag + "winston")
@@ -42,6 +43,11 @@ console.time(_tag + "pino")
 for(let i=0; i<size; i++)
     pino.info(message)
 console.timeEnd(_tag + "pino")
+
+console.time(_tag + "polog json")
+for(let i=0; i<size; i++)
+    jpolog.info(message)
+console.timeEnd(_tag + "polog json")
 
 console.time(_tag + "polog")
 for(let i=0; i<size; i++)

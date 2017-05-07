@@ -3,9 +3,9 @@
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/pkoretic/polog/blob/master/LICENSE)<br/>
 [![NPM](https://nodei.co/npm/polog.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/polog)
 
-`polog` is one of the [fastest](benchmarks) and simplest Node.js logging library that behaves as the standard
-`console` command. It adds some sugar as timestamp and log levels. This library uses as
-little processing power as possible to avoid affecting Node.js event loop.
+`polog` is one of the [fastest](benchmarks) and simplest Node.js logging library that behaves as the
+standard `console` command. It adds minor features as timestamp, log levels and json as opt-in. This
+library uses as little processing power as possible to avoid affecting Node.js event loop.
 
 Logging (in Node.js) should always use stdout/stderr and leave advanced logging manipulation to the
 rest of the stack. For best performance and asynchronous operation you should use pipes on Linux as
@@ -24,33 +24,39 @@ npm install polog
 
 Options can be passed as object before creation.
 
-**debug** - enable output of `.debug` function, if set to `false` (default) it won't print anything
+**debug** - `true/false` - enable output of `.debug` function, if set to `false` (default) it won't print anything
 
 ```
 const log = require("polog")({ debug: true })
 log.debug("will be shown")
 ```
 
-**format** - enable usage of util.format, ie:
+**format** - `true/false` - enable usage of util.format, ie:
 
 ```
 const log = require("polog")({ format: true })
 log.info("test: %d", Math.random())
 ```
 
-if disabled (default), which is faster, use ES6 template strings
+if set to `false` (default), which is faster, use ES6 template strings
 
 ```
 log.info("test: ${Math.random()}")
 ```
 
-**prefix** - prefix messages with custom output, default is `Date.now`
+**prefix** - `function` - prefix messages with custom output, default is `Date.now`
 ```
 const log = require("../index.js")({ prefix: () => { return (new Date).toISOString() }})
 ```
 
 Keep in mind that this is also called on every message output, so you want to keep it as simple as
 possible.
+
+**json** - `true/false` - use json array format, defaults to `false`
+```
+const log = require("polog")({ json: true })
+log.info("json")
+```
 
 ### Levels
 
@@ -109,7 +115,7 @@ const log = require("polog")()
 log.info(`test message: ${Math.random()}`)
 ````
 
-Changing prefix:
+Changing `prefix`:
 
 ```
 const log = require("../index.js")({ prefix: () => { return (new Date).toISOString() }})
@@ -124,6 +130,19 @@ outputs:
 
 This is probably more user friendly, altough default `Date.now` is faster since Date object doesn't
 have to be created for every function call.
+
+Using `json`:
+
+```
+const log = require("../index.js")({ json: true })
+
+log.info("test message")
+```
+
+outputs:
+```
+[1494153657008,"I","json!"]
+```
 
 ### Fast file logging on Linux
 

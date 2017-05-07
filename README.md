@@ -159,3 +159,12 @@ node app.js > access.log 2>error.log
 ```
 
 ### [Benchmarks](benchmarks)
+
+This should be the fastest logging library for Node.js as far as we know. [Test](benchmarks) it
+yourself and provide feedback.
+
+### Changelog
+
+**1.1.0** Adds `json` support.
+
+**1.0.0** Initial release

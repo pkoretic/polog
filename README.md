@@ -164,6 +164,12 @@ node app.js > access.log 2>error.log
 This should be the fastest logging library for Node.js as far as we know. [Test](benchmarks) it
 yourself and provide feedback.
 
+## Support
+
+ * Issues - [open new issue](https://github.com/pkoretic/polog/issues)
+ * mail - petar.koretic@gmail.com
+ * IRC - `pkoretic` on freenode
+
 ## Changelog
 
 **1.1.0** Adds `json` support.

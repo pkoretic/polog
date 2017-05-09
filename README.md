@@ -129,7 +129,7 @@ outputs:
 2017-05-05T17:53:05.702Z I test message
 ```
 
-This is probably more user friendly, altough default `Date.now` is faster since Date object doesn't
+This is probably more user friendly, although default `Date.now` is faster since Date object doesn't
 have to be created for every function call.
 
 Using `json`:

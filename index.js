@@ -9,7 +9,7 @@ module.exports = function(options = {})
     const EOL = require('os').EOL
 	const JEOL = '"]' + EOL
 
-    return json ? format ? {
+    let logger = json ? format ? {
         info: (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"I","' + format(...msg) + JEOL )},
         debug: !debugMode ? ()=>{} : (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )},
         error: (...msg) => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"E","' + format(...msg) + JEOL )},
@@ -30,4 +30,22 @@ module.exports = function(options = {})
         error: msg => { writeSync(2, prefix() + " E " + msg + EOL )},
         warn: msg  => { writeSync(2, prefix() + " W " + msg + EOL )}
     }
+
+    logger.debugMode = debugMode
+
+    // create debug function
+    logger.enableDebug = () => {
+        logger.debugMode = true
+
+        logger.debug = json ? format ?
+            (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )} :
+            msg => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + msg + JEOL )} :
+            format ? (...msg) => { writeSync(1, prefix() + " D " + format(...msg) + EOL )} :
+            msg => { writeSync(1, prefix() + " D " + msg + EOL )}
+    }
+
+    // remove debug function
+    logger.disableDebug = () => { logger.debugMode = false; logger.debug = () => {}}
+
+    return logger
 }

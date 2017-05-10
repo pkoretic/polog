@@ -59,7 +59,7 @@ const log = require("polog")({ json: true })
 log.info("json")
 ```
 
-## Levels
+## Levels and properties
 
 There are four standard levels:
 
@@ -73,6 +73,12 @@ environment switching
 **error** `E` - `stderr` error output
 
 Currently there is no way to add new levels, if that is wanted, please open an issue.
+
+**debugMode** - `true/false` contains information if debug level is enabled or not
+
+**enableDebug()** - enable debug - same as `debug: true` option at creation time
+
+**disableDebug()** - disable debug - same as `debug: false (default)` option at creation time
 
 ## Standard logging
 

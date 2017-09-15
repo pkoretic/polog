@@ -7,7 +7,7 @@ module.exports = function(options = {})
 
     const writeSync = require("fs").writeSync
     const EOL = require('os').EOL
-	const JEOL = '"]' + EOL
+    const JEOL = '"]' + EOL
 
     let logger = json ? format ? {
         info: (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"I","' + format(...msg) + JEOL )},

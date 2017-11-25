@@ -85,7 +85,7 @@ Currently there is no way to add new levels, if that is wanted, please open an i
 ```
 const log = require("polog")({ debug: true })
 
-log.debug("debug mode") // shown only when debug is set to true above
+log.debug("debug mode") // shown only be visible when debug is set to true as above
 log.info("hello there!")
 log.warn("be careful")
 log.error("not good")

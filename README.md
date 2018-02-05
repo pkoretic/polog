@@ -165,6 +165,17 @@ Split standard and error logs
 node app.js > access.log 2>error.log
 ```
 
+## Disabling logs
+
+Sometimes it might be useful to disable logging library from the outside, like when testing. This
+can be done setting `NOLOG` env variable to `true`.
+
+```
+NOLOG=true node examples/format.js
+```
+
+In this case no logs are shown.
+
 ## [Benchmarks](benchmarks)
 
 This should be the fastest logging library for Node.js as far as we know. [Test](benchmarks) it

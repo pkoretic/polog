@@ -1,5 +1,12 @@
 module.exports = function(options = {})
 {
+    let logger = { debugMode: false }
+    logger.info = logger.debug = logger.error = logger.warn = logger.enableDebug = logger.disableDebug = () => {}
+
+    // support ability to supress logs for testing
+    if(process.env.NOLOG === "true")
+        return logger
+
     const debugMode = options.debug || false
     const format = options.format ? require("util").format : false
     const prefix = options.prefix || Date.now
@@ -9,7 +16,7 @@ module.exports = function(options = {})
     const EOL = require('os').EOL
     const JEOL = '"]' + EOL
 
-    let logger = json ? format ? {
+    logger = json ? format ? {
         info: (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"I","' + format(...msg) + JEOL )},
         debug: !debugMode ? ()=>{} : (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )},
         error: (...msg) => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"E","' + format(...msg) + JEOL )},

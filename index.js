@@ -12,30 +12,29 @@ module.exports = function(options = {})
     const prefix = options.prefix || Date.now
     const json = options.json || false
 
-    const writeSync = require("fs").writeSync
     const EOL = require('os').EOL
     const JEOL = '"]' + EOL
 
     logger = json ? format ? {
-        info: (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"I","' + format(...msg) + JEOL )},
-        debug: !debugMode ? ()=>{} : (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )},
-        error: (...msg) => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"E","' + format(...msg) + JEOL )},
-        warn: (...msg) => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"W","' + format(...msg) + JEOL )}
+        info: (...msg) => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"I","' + format(...msg) + JEOL )},
+        debug: !debugMode ? ()=>{} : (...msg) => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )},
+        error: (...msg) => { process.stderr.write('[' + JSON.stringify(prefix()) + ',"E","' + format(...msg) + JEOL )},
+        warn: (...msg) => { process.stderr.write('[' + JSON.stringify(prefix()) + ',"W","' + format(...msg) + JEOL )}
     } : {
-        info: msg => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"I","' + msg + JEOL )},
-        debug: !debugMode ? ()=>{} : msg => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + msg + JEOL )},
-        error: msg => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"E","' + msg + JEOL )},
-        warn: msg  => { writeSync(2, '[' + JSON.stringify(prefix()) + ',"W","' + msg + JEOL )}
+        info: msg => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"I","' + msg + JEOL )},
+        debug: !debugMode ? ()=>{} : msg => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"D","' + msg + JEOL )},
+        error: msg => { process.stderr.write('[' + JSON.stringify(prefix()) + ',"E","' + msg + JEOL )},
+        warn: msg  => { process.stderr.write('[' + JSON.stringify(prefix()) + ',"W","' + msg + JEOL )}
     } : format ? {
-        info: (...msg) => { writeSync(1, prefix() + " I " + format(...msg) + EOL )},
-        debug: !debugMode ? ()=>{} : (...msg) => { writeSync(1, prefix() + " D " + format(...msg) + EOL )},
-        error: (...msg) => { writeSync(2, prefix() + " E " + format(...msg) + EOL )},
-        warn: (...msg) => { writeSync(2, prefix() + " W " + format(...msg) + EOL )}
+        info: (...msg) => { process.stdout.write(prefix() + " I " + format(...msg) + EOL )},
+        debug: !debugMode ? ()=>{} : (...msg) => { process.stdout.write(prefix() + " D " + format(...msg) + EOL )},
+        error: (...msg) => { process.stderr.write(prefix() + " E " + format(...msg) + EOL )},
+        warn: (...msg) => { process.stderr.write(prefix() + " W " + format(...msg) + EOL )}
     } : {
-        info: msg => { writeSync(1, prefix() + " I " + msg + EOL )},
-        debug: !debugMode ? ()=>{} : msg => { writeSync(1, prefix() + " D " + msg + EOL )},
-        error: msg => { writeSync(2, prefix() + " E " + msg + EOL )},
-        warn: msg  => { writeSync(2, prefix() + " W " + msg + EOL )}
+        info: msg => { process.stdout.write(prefix() + " I " + msg + EOL )},
+        debug: !debugMode ? ()=>{} : msg => { process.stdout.write(prefix() + " D " + msg + EOL )},
+        error: msg => { process.stderr.write(prefix() + " E " + msg + EOL )},
+        warn: msg  => { process.stderr.write(prefix() + " W " + msg + EOL )}
     }
 
     logger.debugMode = debugMode
@@ -45,10 +44,10 @@ module.exports = function(options = {})
         logger.debugMode = true
 
         logger.debug = json ? format ?
-            (...msg) => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )} :
-            msg => { writeSync(1, '[' + JSON.stringify(prefix()) + ',"D","' + msg + JEOL )} :
-            format ? (...msg) => { writeSync(1, prefix() + " D " + format(...msg) + EOL )} :
-            msg => { writeSync(1, prefix() + " D " + msg + EOL )}
+            (...msg) => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"D","' + format(...msg) + JEOL )} :
+            msg => { process.stdout.write('[' + JSON.stringify(prefix()) + ',"D","' + msg + JEOL )} :
+            format ? (...msg) => { process.stdout.write(prefix() + " D " + format(...msg) + EOL )} :
+            msg => { process.stdout.write(prefix() + " D " + msg + EOL )}
     }
 
     // remove debug function

@@ -42,7 +42,7 @@ log.info("test: %d", Math.random())
 if set to `false` (default), which is faster, use ES6 template strings
 
 ```
-log.info("test: ${Math.random()}")
+log.info(`test: ${Math.random()}`)
 ```
 
 **prefix** - `function` - prefix messages with custom output, default is `Date.now`
